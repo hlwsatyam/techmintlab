@@ -93,7 +93,7 @@ import {
   Home,
   Menu
 } from 'lucide-react'
-import Image from 'next/image'
+import { Suspense } from 'react'
 
 // Comprehensive technology database
 const technologiesDatabase = [
@@ -1192,7 +1192,18 @@ export default function SearchPage() {
   }
 
   return (
-    <>
+
+
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="w-12 h-12 text-blue-500 animate-spin mx-auto mb-4" />
+          <p className="text-gray-600">Loading search...</p>
+        </div>
+      </div>
+    }>
+
+  <>
       {/* Hero Section */}
       <section className="relative pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50">
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
@@ -1969,5 +1980,12 @@ export default function SearchPage() {
         </div>
       </section>
     </>
+
+
+    </Suspense>
+
+
+
+  
   )
 }
