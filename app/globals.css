@@ -1,4 +1,4 @@
-@import "tailwindcss";
+/* @import "tailwindcss";
  @layer base {
   :root {
     --background: 0 0% 100%;
@@ -15,4 +15,35 @@
   }
 }
 
- 
+  */
+
+
+
+
+
+
+
+
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden; /* No scroll */
+    height: 100%;
+  }
+
+  body {
+    @apply text-gray-800;
+    overflow-x: hidden; /* No scroll */
+    height: 100vh;
+  }
+}
+
+
+
