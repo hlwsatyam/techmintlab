@@ -124,14 +124,8 @@ const localBusinessSchema = {
   },
   openingHours: 'Mo-Fr 09:00-18:00',
   priceRange: '₹₹',
-  image: 'https://techmintlab.com/office-image.jpg',
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '4.9',
-    reviewCount: '150',
-    bestRating: '5',
-    worstRating: '1'
-  },
+  image: 'https://techmintlab.com/logo.png',
+
   areaServed: [
     {
       '@type': 'City',

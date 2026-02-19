@@ -198,13 +198,7 @@ const jsonLd = {
         availability: 'https://schema.org/InStock',
         offerCount: '8'
       },
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.9',
-        ratingCount: '50',
-        bestRating: '5',
-        worstRating: '1'
-      }
+     
     },
     {
       '@type': 'FAQPage',
