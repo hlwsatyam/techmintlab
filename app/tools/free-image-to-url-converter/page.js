@@ -738,7 +738,7 @@ const videoSchema = {
 
 
 
-// Product schema (if offering premium features)
+ // Product schema (if offering premium features)
 const productSchema = {
   '@context': 'https://schema.org',
   '@type': 'Product',
@@ -793,7 +793,43 @@ const productSchema = {
     priceCurrency: 'USD',
     priceValidUntil: '2024-12-31',
     availability: 'https://schema.org/InStock',
-    url: `${baseUrl}/premium`
+    url: `${baseUrl}/premium`,
+    // Add these optional fields for digital products
+    shippingDetails: {
+      '@type': 'OfferShippingDetails',
+      shippingDestination: {
+        '@type': 'DefinedRegion',
+        addressCountry: 'US'
+      },
+      shippingRate: {
+        '@type': 'MonetaryAmount',
+        value: '0',
+        currency: 'USD'
+      },
+      deliveryTime: {
+        '@type': 'ShippingDeliveryTime',
+        handlingTime: {
+          '@type': 'QuantitativeValue',
+          minValue: '0',
+          maxValue: '0',
+          unitCode: 'DAY'
+        },
+        transitTime: {
+          '@type': 'QuantitativeValue',
+          minValue: '0',
+          maxValue: '0',
+          unitCode: 'DAY'
+        }
+      }
+    },
+    hasMerchantReturnPolicy: {
+      '@type': 'MerchantReturnPolicy',
+      applicableCountry: 'US',
+      returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
+      merchantReturnDays: 0,
+      returnMethod: 'https://schema.org/ReturnByMail',
+      returnFees: 'https://schema.org/FreeReturn'
+    }
   }
 }
 
