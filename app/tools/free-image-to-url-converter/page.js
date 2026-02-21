@@ -618,22 +618,23 @@ export default function Page() {
   }
 
   // Video schema (if you have a tutorial video)
-  const videoSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'VideoObject',
-    name: 'How to Use Image to URL Converter - Complete Tutorial',
-    description: 'Learn how to convert images to URLs with our free online tool. Drag & drop, paste from clipboard, and get instant shareable links.',
-    thumbnailUrl: [
-      `${baseUrl}/og-images/image-to-url-converter-square.jpg`,
-      `${baseUrl}/og-images/image-to-url-converter-square.jpg`
-    ],
-    uploadDate: '2024-01-15',
-    duration: 'PT3M30S',
-    contentUrl: `${baseUrl}/og-images/image-to-url-converter-square.jpg`,
-    embedUrl: `${baseUrl}/video/embed`,
-    interactionCount: '15427',
-    expires: '2025-12-31'
-  }
+ // Video schema (if you have a tutorial video)
+const videoSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'VideoObject',
+  name: 'How to Use Image to URL Converter - Complete Tutorial',
+  description: 'Learn how to convert images to URLs with our free online tool. Drag & drop, paste from clipboard, and get instant shareable links.',
+  thumbnailUrl: [
+    `${baseUrl}/og-images/image-to-url-converter-square.jpg`,
+    `${baseUrl}/og-images/image-to-url-converter-square.jpg`
+  ],
+  uploadDate: '2024-01-15T00:00:00Z', // Added timezone (Z for UTC)
+  duration: 'PT3M30S',
+  contentUrl: `${baseUrl}/og-images/image-to-url-converter-square.jpg`,
+  embedUrl: `${baseUrl}/video/embed`,
+  interactionCount: '15427',
+  expires: '2025-12-31T23:59:59Z' // Added timezone (Z for UTC)
+}
 
   // Local business schema (if applicable)
   const localBusinessSchema = {
