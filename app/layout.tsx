@@ -4,6 +4,7 @@ import './globals.css'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import { generateSEO } from '../lib/seo'
+import Script from "next/script";
 
 const inter = Inter({ subsets: ['latin'] })
 const poppins = Poppins({ 
@@ -21,9 +22,27 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
+
+
+
+
+
         <meta name="google-adsense-account" content="ca-pub-1369545194702286"/> 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+
+
+  <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1369545194702286"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+
+
+
+
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
