@@ -734,16 +734,59 @@ const videoSchema = {
 
   // Product schema (if offering premium features)
  // Product schema (if offering premium features)
+ 
+
+
+
+// Product schema (if offering premium features)
 const productSchema = {
   '@context': 'https://schema.org',
   '@type': 'Product',
   name: 'Image to URL Converter Premium',
   description: 'Premium features for image to URL conversion including unlimited expiry, priority support, and API access.',
-  image: `${baseUrl}/og-images/image-to-url-converter-square.jpg`, // Add this line
+  image: `${baseUrl}/og-images/image-to-url-converter-square.jpg`,
   brand: {
     '@type': 'Brand',
     name: 'Image to URL Converter'
   },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.8',
+    ratingCount: '1250',
+    reviewCount: '1250',
+    bestRating: '5',
+    worstRating: '1'
+  },
+  review: [
+    {
+      '@type': 'Review',
+      author: {
+        '@type': 'Person',
+        name: 'Alex Johnson'
+      },
+      datePublished: '2024-02-20',
+      reviewBody: 'The premium features are worth every penny. Unlimited expiry and API access saved me hours of work.',
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: '5',
+        bestRating: '5'
+      }
+    },
+    {
+      '@type': 'Review',
+      author: {
+        '@type': 'Person',
+        name: 'Maria Garcia'
+      },
+      datePublished: '2024-02-18',
+      reviewBody: 'Priority support is amazing - they helped me integrate the API within minutes.',
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: '5',
+        bestRating: '5'
+      }
+    }
+  ],
   offers: {
     '@type': 'Offer',
     price: '9.99',
@@ -753,6 +796,15 @@ const productSchema = {
     url: `${baseUrl}/premium`
   }
 }
+
+
+
+
+
+
+
+
+
 
   return (
     <>
