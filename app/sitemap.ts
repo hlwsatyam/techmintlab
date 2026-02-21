@@ -29,9 +29,7 @@
 //   ]
 // }
 
-
-
- import { MetadataRoute } from 'next'
+import { MetadataRoute } from 'next'
 import fs from 'fs'
 import path from 'path'
 
@@ -41,42 +39,83 @@ export default function sitemap(): MetadataRoute.Sitemap {
   
   const routes: string[] = []
   
-  function getAllRoutes(dir: string, baseRoute: string = '') {
-    const items = fs.readdirSync(dir)
-    
-    items.forEach((item) => {
-      // Skip special directories and files
-      if (item.startsWith('_') || item.startsWith('.')) return
+  function getAllValidRoutes(dir: string, basePath: string = '') {
+    try {
+      const items = fs.readdirSync(dir)
       
-      const fullPath = path.join(dir, item)
-      const stat = fs.statSync(fullPath)
-      
-      if (stat.isDirectory()) {
-        // Check if this directory has a page.tsx file
-        const pagePath = path.join(fullPath, 'page.tsx')
-        if (fs.existsSync(pagePath)) {
-          const route = path.join(baseRoute, item)
-          routes.push(route)
+      items.forEach((item) => {
+        // Skip unwanted items
+        if (item.startsWith('_') || 
+            item.startsWith('.') || 
+            item === 'api' || 
+            item === 'layout.js' ||
+            item === 'layout.tsx' ||
+            item === 'layout.jsx' ||
+            item.includes('[') || // Skip dynamic routes for now
+            item.includes('(')) { // Skip route groups
+          return
         }
         
-        // Recursively check subdirectories
-        getAllRoutes(fullPath, path.join(baseRoute, item))
-      }
-    })
+        const fullPath = path.join(dir, item)
+        const stat = fs.statSync(fullPath)
+        
+        if (stat.isDirectory()) {
+          // Check for page files in this directory
+          const pageExtensions = ['page.js', 'page.tsx', 'page.jsx']
+          const hasPageFile = pageExtensions.some(ext => 
+            fs.existsSync(path.join(fullPath, ext))
+          )
+          
+          if (hasPageFile) {
+            // Create proper URL path
+            const routePath = basePath ? `${basePath}/${item}` : item
+            routes.push(routePath)
+          }
+          
+          // RECURSION: Go inside every subdirectory
+          getAllValidRoutes(fullPath, basePath ? `${basePath}/${item}` : item)
+        }
+      })
+    } catch (error) {
+      console.error(`Error reading directory ${dir}:`, error)
+    }
   }
   
-  getAllRoutes(appDirectory)
+  // Start scanning from app directory
+  getAllValidRoutes(appDirectory)
   
-  // Convert routes to sitemap format
-  const sitemapEntries = routes.map((route) => ({
-    url: `${baseUrl}${route === '' ? '' : route}`,
-    lastModified: new Date(),
-  }))
+  // Sort routes for better organization
+  routes.sort()
   
+  // Generate sitemap with proper URLs
+  const sitemapEntries = routes.map((route) => {
+    // Determine priority based on depth
+    const depth = route.split('/').length
+    let priority = 0.7
+    if (depth === 1) priority = 0.8
+    if (route === '') priority = 1.0
+    
+    // Determine change frequency
+    let changeFreq: 'daily' | 'weekly' | 'monthly' = 'weekly'
+    if (route.includes('tools/') || route.includes('fools/')) {
+      changeFreq = 'daily'
+    }
+    
+    return {
+      url: `${baseUrl}/${route}`,
+      lastModified: new Date(),
+      changeFrequency: changeFreq,
+      priority: priority,
+    }
+  })
+  
+  // Return homepage + all routes
   return [
     {
       url: baseUrl,
       lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 1.0,
     },
     ...sitemapEntries,
   ]
