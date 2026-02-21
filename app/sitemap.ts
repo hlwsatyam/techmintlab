@@ -1,74 +1,33 @@
  
+
+
+
+
 // import { MetadataRoute } from 'next'
+// import fs from 'fs'
+// import path from 'path'
 
 // export default function sitemap(): MetadataRoute.Sitemap {
 //   const baseUrl = 'https://techmintlab.com'
-  
+//   const pagesDirectory = path.join(process.cwd(), 'app')
+
+//   const staticPages = fs.readdirSync(pagesDirectory)
+
+//   const routes = staticPages
+//     .filter((page) => page !== 'api' && page !== 'layout.tsx')
+//     .map((page) => ({
+//       url: `${baseUrl}/${page === 'page.tsx' ? '' : page}`,
+//       lastModified: new Date(),
+//     }))
+
 //   return [
 //     {
 //       url: baseUrl,
 //       lastModified: new Date(),
-//       changeFrequency: 'weekly',
-//       priority: 1,
 //     },
-//     {
-//       url: `${baseUrl}/services`,
-//       lastModified: new Date(),
-//       changeFrequency: 'weekly',
-//       priority: 0.8,
-//     },
-//     {
-//       url: `${baseUrl}/about`,
-//       lastModified: new Date(),
-//       changeFrequency: 'monthly',
-//       priority: 0.7,
-//     },
-//     {
-//       url: `${baseUrl}/software-development-karnal`,
-//       lastModified: new Date(),
-//       changeFrequency: 'monthly',
-//       priority: 0.7,
-//     },
-//     {
-//       url: `${baseUrl}/website-designer-in-karnal`,
-//       lastModified: new Date(),
-//       changeFrequency: 'monthly',
-//       priority: 0.7,
-//     },
-//     {
-//       url: `${baseUrl}/hi`,
-//       lastModified: new Date(),
-//       changeFrequency: 'monthly',
-//       priority: 0.7,
-//     },
-//     {
-//       url: `${baseUrl}/our-technologies`,
-//       lastModified: new Date(),
-//       changeFrequency: 'monthly',
-//       priority: 0.7,
-//     },
-//     {
-//       url: `${baseUrl}/digital-marketing-karnal`,
-//       lastModified: new Date(),
-//       changeFrequency: 'monthly',
-//       priority: 0.7,
-//     },
-//     {
-//       url: `${baseUrl}/portfolio`,
-//       lastModified: new Date(),
-//       changeFrequency: 'weekly',
-//       priority: 0.8,
-//     },
-//     {
-//       url: `${baseUrl}/contact`,
-//       lastModified: new Date(),
-//       changeFrequency: 'monthly',
-//       priority: 0.9,
-//     },
+//     ...routes,
 //   ]
 // }
-
-
 
 
 
@@ -79,27 +38,37 @@ import path from 'path'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://techmintlab.com'
-  const pagesDirectory = path.join(process.cwd(), 'app')
+  const appDir = path.join(process.cwd(), 'app')
 
-  const staticPages = fs.readdirSync(pagesDirectory)
+  function getRoutes(dir: string, parentPath = ''): string[] {
+    const files = fs.readdirSync(dir)
 
-  const routes = staticPages
-    .filter((page) => page !== 'api' && page !== 'layout.tsx')
-    .map((page) => ({
-      url: `${baseUrl}/${page === 'page.tsx' ? '' : page}`,
-      lastModified: new Date(),
-    }))
+    let routes: string[] = []
 
-  return [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-    },
-    ...routes,
-  ]
+    files.forEach((file) => {
+      const fullPath = path.join(dir, file)
+      const stat = fs.statSync(fullPath)
+
+      if (stat.isDirectory()) {
+        if (file !== 'api') {
+          routes = routes.concat(
+            getRoutes(fullPath, `${parentPath}/${file}`)
+          )
+        }
+      }
+
+      if (file === 'page.tsx') {
+        routes.push(parentPath || '')
+      }
+    })
+
+    return routes
+  }
+
+  const routes = getRoutes(appDir)
+
+  return routes.map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date(),
+  }))
 }
-
-
-
-
-
