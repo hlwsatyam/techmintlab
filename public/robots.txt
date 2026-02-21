@@ -1,0 +1,8 @@
+# public/robots.txt
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /api/
+Sitemap: https://techmintlab/sitemap.xml
+Host: https://techmintlab.com

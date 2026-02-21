@@ -1,0 +1,49 @@
+ 
+{
+  "name": "Image to URL Converter",
+  "short_name": "Img2URL",
+  "description": "Free image to URL converter. Drag & drop or paste images to get instant shareable links.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icons/shortcut-history.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    } 
+  ],
+  "screenshots": [
+    {
+      "src": "/icons/shortcut-history.png",
+      "sizes": "1920x1080",
+      "type": "image/jpeg",
+      "platform": "wide",
+      "label": "Desktop view of Image to URL Converter"
+    } 
+   
+  ],
+  "shortcuts": [
+  
+    {
+      "name": "View History",
+      "short_name": "History",
+      "description": "View upload history",
+      "url": "/tools/free-image-to-url-converter?history=true",
+      "icons": [
+        {
+          "src": "/icons/shortcut-history.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "categories": ["utilities", "productivity", "multimedia"],
+  "lang": "en",
+  "dir": "ltr",
+  "prefer_related_applications": false
+}

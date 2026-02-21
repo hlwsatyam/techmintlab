@@ -75,7 +75,7 @@ const Header = () => {
                 <Phone className="w-5 h-5 text-white" />
                 <div className="absolute inset-0 bg-blue-400 rounded-full animate-ping opacity-20"></div>
               </div>
-              <span className="font-semibold text-white group-hover:text-cyan-200 transition-colors">
+              <span className="font-semibold text-black group-hover:text-cyan-200 transition-colors">
                 +91-7027944324
               </span>
             </a>
@@ -83,8 +83,8 @@ const Header = () => {
               href="/contact" 
               className="relative overflow-hidden group"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 animate-gradient-x opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="relative bg-white text-gray-800 px-6 py-3 rounded-full font-semibold hover:text-black transition-all duration-300 group-hover:shadow-lg group-hover:shadow-purple-500/30">
+              <div className="absolute inset-0 !bg-green-500 bg-gradient-to-r  animate-gradient-x opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="relative !bg-green-500  text-gray-800 px-6 py-3 rounded-full font-semibold hover:text-black transition-all duration-300 group-hover:shadow-lg group-hover:shadow-purple-500/30">
                 Contact Us Now
                 <div className="absolute -right-2 -top-2 w-4 h-4 bg-yellow-400 rounded-full animate-bounce"></div>
               </div>
