@@ -732,24 +732,26 @@ export default function Page() {
   }
 
   // Product schema (if offering premium features)
-  const productSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
-    name: 'Image to URL Converter Premium',
-    description: 'Premium features for image to URL conversion including unlimited expiry, priority support, and API access.',
-    brand: {
-      '@type': 'Brand',
-      name: 'Image to URL Converter'
-    },
-    offers: {
-      '@type': 'Offer',
-      price: '9.99',
-      priceCurrency: 'USD',
-      priceValidUntil: '2024-12-31',
-      availability: 'https://schema.org/InStock',
-      url: `${baseUrl}/premium`
-    }
+ // Product schema (if offering premium features)
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'Image to URL Converter Premium',
+  description: 'Premium features for image to URL conversion including unlimited expiry, priority support, and API access.',
+  image: `${baseUrl}/og-images/image-to-url-converter-square.jpg`, // Add this line
+  brand: {
+    '@type': 'Brand',
+    name: 'Image to URL Converter'
+  },
+  offers: {
+    '@type': 'Offer',
+    price: '9.99',
+    priceCurrency: 'USD',
+    priceValidUntil: '2024-12-31',
+    availability: 'https://schema.org/InStock',
+    url: `${baseUrl}/premium`
   }
+}
 
   return (
     <>
